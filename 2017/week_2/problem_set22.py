@@ -17,25 +17,28 @@ Updated balance each month =
 """
 
 monthlyInterestRate = annualInterestRate / 12.0
-    
-def main(minimumFixedMonthlyPayment):
-    
-    def monthlyUnpaidBalance(balance):
-        return balance - minimumFixedMonthlyPayment
 
-    def updatedBalanceEachMonth(balance):
-        return monthlyUnpaidBalance(balance) + monthlyInterestRate * monthlyUnpaidBalance(balance)
-        
-    def loop(balance, nMonth):
-        if (nMonth < 1):
-            return balance
-        else:
-            return loop(updatedBalanceEachMonth(balance), nMonth-1)
+def monthlyUnpaidBalance(balance, minimumFixedMonthlyPayment):
+    return balance - minimumFixedMonthlyPayment
+
+def updatedBalanceEachMonth(balance, minimumFixedMonthlyPayment):
+    return monthlyUnpaidBalance(balance, minimumFixedMonthlyPayment) \
+            + monthlyInterestRate * \
+            + monthlyUnpaidBalance(balance, minimumFixedMonthlyPayment)
             
-    def isPaid(balance):
-        return loop(balance, 12) <= 0
+def loop(balance, minimumFixedMonthlyPayment, nMonth):
+    if (nMonth < 1):
+        return balance
+    else:
+        return loop(updatedBalanceEachMonth(balance, minimumFixedMonthlyPayment),
+                    minimumFixedMonthlyPayment,
+                    nMonth-1)
 
-    if isPaid(balance):
+def isPaid(balance, minimumFixedMonthlyPayment):
+    return loop(balance, minimumFixedMonthlyPayment, 12) <= 0
+
+def main(minimumFixedMonthlyPayment):
+    if isPaid(balance, minimumFixedMonthlyPayment):
         return minimumFixedMonthlyPayment
     else:
         return main(minimumFixedMonthlyPayment + 10)
