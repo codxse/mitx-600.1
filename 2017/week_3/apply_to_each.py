@@ -13,15 +13,9 @@ def abs(x):
         return x
     else:
         return -x
-    
-def square(a):
-    return a*a
 
 def halve(a):
     return a/2
-
-def inc(a):
-    return a+1
         
 def applyEachTo(L, x):
     result = []
@@ -29,3 +23,10 @@ def applyEachTo(L, x):
         result.append(L[i](x))
     return result
 
+# [2, -3, 9, -8]
+def inc(a):
+    return a+1
+
+# [1, 16, 64, 81]
+def square(a):
+    return a*a

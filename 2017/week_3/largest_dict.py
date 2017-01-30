@@ -26,7 +26,4 @@ def biggest(aDict):
             max = len(aDict[val])
             largest = val
     
-    return str(largest)
-    
-    
-print(biggest(animals))
+    return largest
