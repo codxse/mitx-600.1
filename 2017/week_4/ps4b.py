@@ -100,6 +100,26 @@ def compPlayHand(hand, wordList, n):
 # Problem #6: Playing a game
 #
 #
+
+def palyWithWho(hand, wordList, n, count):
+    while True:
+        key = input("Enter u to have yourself play, " +
+                    "c to have the computer play: ")
+        
+        if key == "u":
+            playHand(hand, wordList, n)
+            count += 1
+            break
+        elif key == "c":
+            compPlayHand(hand, wordList, n)
+            count += 1
+            break
+        else:
+            print("Invalid command.")
+            continue
+        
+    return count
+    
 def playGame(wordList):
     """
     Allow the user to play an arbitrary number of hands.
@@ -124,8 +144,31 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this when you code this function
+    
+    n = HAND_SIZE
+    count = 0
+    hand = {}
+    
+    while True:
+        key = input("Enter n to deal a new hand, r to " + 
+                    "replay the last hand, or e to end game: ")
+        
+        if key == "r":
+            if count == 0:
+                print("You have not played a hand yet. " +
+                      "Please play a new hand first!")
+                continue
+            count += palyWithWho(hand, wordList, n, count)
+        elif key == "n":
+            hand = dealHand(n)
+            count += palyWithWho(hand, wordList, n, count)
+        elif key == "e":
+            break
+        else:
+            print("Invalid command.")
+            
+    return None
+    
 
         
 #

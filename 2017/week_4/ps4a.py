@@ -229,8 +229,8 @@ def playHand(hand, wordList, n):
         displayHand(hand)
 
         # Ask user for input
-        word = input("Enter word, or a \".\" to indicate that you are \
-                     finished: ")
+        word = input("Enter word, or a \".\" to indicate that you are " +
+                     "finished: ")
         
         # If the input is a single period:
         if word == ".":
